@@ -25,14 +25,14 @@
             let dobMonth = document.getElementById("dob-month").value;
             let dobYear = document.getElementById("dob-year").value;
 
-            console.log("TODAY = " + todayDay + "-" + todayMonth + "-" + todayYear);
-            console.log("BIRTHDAY = " + dobDay + "-" + dobMonth + "-" + dobYear);
+            // console.log("TODAY = " + todayDay + "-" + todayMonth + "-" + todayYear);
+            // console.log("BIRTHDAY = " + dobDay + "-" + dobMonth + "-" + dobYear);
 
             let diffYear = todayYear - dobYear;
             let diffMonth = todayMonth - dobMonth;
             let diffDay = todayDay - dobDay;
 
-            console.log("DIFF1 = " + diffDay + "-" + diffMonth + "-" + diffYear);
+            // console.log("DIFF1 = " + diffDay + "-" + diffMonth + "-" + diffYear);
 
             if (diffDay < 0) {
                   diffDay = 0;
@@ -50,8 +50,8 @@
             
             let age = diffYear;
 
-            console.log("DIFF2 = " + diffDay + "-" + diffMonth + "-" + diffYear);
-            console.log(age);
+            // console.log("DIFF2 = " + diffDay + "-" + diffMonth + "-" + diffYear);
+            console.log("Vous avez " + age + " ans.");
             return age;
       });
 })();
