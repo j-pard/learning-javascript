@@ -26,4 +26,17 @@
     ];
 
     // your code here
+
+    document.getElementById("run").addEventListener("click", () => {
+        let thereIsApple = false;
+        fruits.forEach(fruit => {
+            if (fruit === "pomme")
+                thereIsApple = true;
+        });
+        if (thereIsApple)
+            console.log("Oui");
+        else 
+            console.log("Non");
+        
+    });
 })();

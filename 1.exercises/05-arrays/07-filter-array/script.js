@@ -89,4 +89,15 @@
     ];
 
     // your code here
+
+    let major = [];
+
+    document.getElementById("run").addEventListener("click", () => {
+        people.forEach(guy => {
+            if (guy.age >= 18) {
+                major.push(guy);
+            }
+        });
+        console.log(major);
+    });
 })();

@@ -89,4 +89,14 @@
     ];
 
     // your code here
+
+    document.getElementById("run").addEventListener("click", () => {
+        people.forEach(guy => {
+            if (guy.lastname == "Dupont" && guy.firstname == "Jean") {
+                console.log("L'email de Jean Dupont est : " + guy.email);
+                console.log("Jean se trouve à l'index " + people.indexOf(guy) + " dans le tableau.");
+            }
+        });
+    });
+
 })();
