@@ -88,5 +88,16 @@
         },
     ];
 
+    function makeSum() {
+        let total = 0;
+        for (i=0; i<people.length; i++) {
+            total = total + people[i].age;
+        }
+        return total;
+    }
+
     // your code here
+    document.getElementById("run").addEventListener("click", () => {
+        console.log(people.reduce(makeSum));
+  });
 })();

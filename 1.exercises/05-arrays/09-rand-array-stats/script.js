@@ -10,5 +10,32 @@
 // You will have time to focus on it later.
 
 (() => {
-    // your code here
+
+      let positions = [];
+
+      for (i=0; i<10; i++) {
+            positions[i] = document.getElementById(`n-${i+1}`);
+      }
+
+      const min = document.getElementById("min");
+      const max = document.getElementById("max");
+      const sum = document.getElementById("sum");
+      const ave = document.getElementById("average");
+
+      let randomNumbers = [];
+
+      document.getElementById("run").addEventListener("click", () => {
+            let total = 0;
+            for (j=0; j<10; j++) { // Random numbers + mise en tableau + mise en place + sum
+                  randomNumbers[j] = Math.floor(Math.random() * 101) +1;
+                  positions[j].innerHTML = randomNumbers[j];
+                  total = total + randomNumbers[j];
+            }
+
+
+            min.innerHTML = Math.min(...randomNumbers);
+            max.innerHTML = Math.max(...randomNumbers);
+            sum.innerHTML = total;
+            ave.innerHTML = total/randomNumbers.length;
+      });
 })();
