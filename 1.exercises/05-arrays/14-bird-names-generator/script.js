@@ -39,4 +39,18 @@
     ]);
 
     // your code here
+    let adjectivesArr = Array.from(adjectives);
+
+    document.getElementById("run").addEventListener("click", () => {
+        let birdIndex = Math.floor(Math.random() * 12);
+        let adjIndex = Math.floor(Math.random() * 10);
+        let adjective;
+
+        if (birds[birdIndex].fem)
+            adjective = `${adjectivesArr[adjIndex]}e`;
+        else
+            adjective = `${adjectivesArr[adjIndex]}`;
+
+        console.log(`${birds[birdIndex].name} ${adjective}`);
+    });
 })();

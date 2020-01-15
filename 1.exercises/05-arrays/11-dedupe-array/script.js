@@ -27,5 +27,13 @@
         "cerise",
     ];
 
+    let uniques;
+
     // your code here
+    document.getElementById("run").addEventListener("click", () => {
+        uniques = new Set(fruits);    
+        uniques = [...uniques]; // Back to Array          
+        console.log(uniques);
+    });
+    
 })();
