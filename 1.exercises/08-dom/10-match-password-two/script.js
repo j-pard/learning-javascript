@@ -10,5 +10,18 @@
 // You will have time to focus on it later.
 
 (() => {
-    // your code here
+      document.getElementById("run").addEventListener("click", () => {
+            let passOne = document.getElementById("pass-one");
+            let passTwo = document.getElementById("pass-two");
+
+            if (passOne.value === passTwo.value) {
+                  passOne.classList.remove("error");
+                  ppassTwo.classList.remove("error");
+                  alert("Welcome in private room");
+            }
+            else {
+                  passOne.classList.add("error");
+                  passTwo.classList.add("error");
+            }
+      });
 })();

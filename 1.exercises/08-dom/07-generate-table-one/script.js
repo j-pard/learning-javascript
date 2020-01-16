@@ -11,4 +11,13 @@
 
 (() => {
     // your code here
+
+    const target = document.getElementById("target");
+
+    let table = document.createElement("table");
+    for (let i=0; i<10; i++) {
+          table.insertRow();
+    }
+    
+    target.appendChild(table);
 })();

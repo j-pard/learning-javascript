@@ -11,4 +11,19 @@
 
 (() => {
     // your code here
+      const target = document.getElementById("target");
+      let table = document.createElement("table");
+
+      for (let i=1; i<11; i++) {
+            let column = document.createElement("td");
+            for (let k=1; k<11; k++) {
+                  let row = document.createElement("tr");
+                  row.innerHTML = `${i}*${k}=${i*k}`;
+                  column.appendChild(row);
+            }
+            table.appendChild(column);
+      }
+      
+
+      target.appendChild(table);
 })();

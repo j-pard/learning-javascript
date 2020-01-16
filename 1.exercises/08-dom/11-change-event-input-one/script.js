@@ -10,5 +10,10 @@
 // You will have time to focus on it later.
 
 (() => {
-    // your code here
+      const pass = document.getElementById("pass-one");
+      pass.setAttribute("maxlength", "10");
+      const counter = document.getElementById("counter");
+      pass.addEventListener("keyup", () => {
+            counter.innerHTML = `${pass.value.length}/10`;
+      });
 })();

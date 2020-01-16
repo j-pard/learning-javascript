@@ -10,5 +10,23 @@
 // You will have time to focus on it later.
 
 (() => {
-    // your code here
+      const num = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+      const pass = document.getElementById("pass-one");
+      const valid = document.getElementById("validity");
+
+      pass.addEventListener("keyup", () => {
+            let numCount = 0;
+            if (pass.value.length >= 8) {
+                  Array.from(pass.value).forEach(char => {
+                        if (num.includes(char))
+                              numCount++;
+                  });
+                  if (numCount >= 2)
+                        valid.innerHTML = "OK !";
+                  else 
+                        valid.innerHTML = "Pas assez de chiffre."
+            }
+            else 
+                  valid.innerHTML = "Mot de passe trop court."
+      });
 })();

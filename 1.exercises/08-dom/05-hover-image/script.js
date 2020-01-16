@@ -11,4 +11,10 @@
 
 (() => {
     // your code here
+    const image = document.querySelector(".material figure img");
+    const newAttr = image.getAttribute("data-hover");
+      image.addEventListener("mouseover", () => {
+            console.log(newAttr);
+            image.setAttribute("src", newAttr);
+      });
 })();
