@@ -10,5 +10,8 @@
 // You will have time to focus on it later.
 
 (() => {
-    // your code here
+      const targets = Array.from(document.getElementsByClassName("target"));
+      targets.forEach(target => {
+            target.innerHTML = "owned";
+      });
 })();

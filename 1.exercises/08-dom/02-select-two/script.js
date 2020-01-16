@@ -11,4 +11,5 @@
 
 (() => {
     // your code here
+    document.querySelector("p.target").innerHTML = "owned";
 })();

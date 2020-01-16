@@ -11,4 +11,11 @@
 
 (() => {
     // your code here
+      const sourceAttr = document.getElementById("source").getAttribute("data-image");
+      const target = document.getElementById("target");
+      const image = document.createElement("img");
+      image.setAttribute("alt", sourceAttr);
+      target.appendChild(image);
+      
+      document.querySelector(".material").removeChild(document.querySelector("#source"));
 })();
