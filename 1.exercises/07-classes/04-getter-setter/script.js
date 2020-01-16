@@ -10,5 +10,28 @@
 // You will have time to focus on it later.
 
 (() => {
-    // your code here
+      class Person {
+            constructor(firstname, lastname) {
+                  this.firstname = firstname;
+                  this.lastname = lastname;
+            }
+
+            get name() {
+                  return this.firstname + " " + this.lastname;
+            }
+
+            set name(str) {
+                  let splitedStr = str.split(" ");;
+                  this.firstname = splitedStr[0];
+                  this.lastname = splitedStr[1];
+            }
+      }
+
+      document.getElementById("run").addEventListener("click", () => {
+            let duCon = new Person("Kevin", "Ducon");
+            console.log(duCon.name); // Etat de départ
+            duCon.name = "Gerard LePoireau"; // Assigne nouveau nom
+            console.log(duCon.name); // Affiche les nouvelles valeurs
+            console.log(duCon); // Affiche l'instance
+      });
 })();
