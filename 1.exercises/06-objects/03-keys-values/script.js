@@ -19,4 +19,15 @@
         status: "married",
     };
     // your code here
+
+    let properties = [];
+    document.getElementById("run").addEventListener("click", () => {
+        let properties = Object.getOwnPropertyNames(person);
+        let values = Object.values(person);
+        console.log("Liste des properties :");
+        console.log(properties);
+        console.log("Liste des valeurs :");
+        console.log(values);
+    });
 })();
+

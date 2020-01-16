@@ -11,4 +11,19 @@
 
 (() => {
     // your code here
+
+      const person = {
+            lastname: 'Pardons',
+            firstname: "Jonathan",
+            age: 28,
+            city: "Pont-à-Celles",
+            country: "Belgium",
+            bio: function() {
+                  console.log(`Hello World, ${this.firstname} ${this.lastname}, ${this.age} old, at your service ! I am from ${this.city} in ${this.country} .`);
+            }
+      };
+
+      document.getElementById("run").addEventListener("click", () => {
+            person.bio();
+      });
 })();
