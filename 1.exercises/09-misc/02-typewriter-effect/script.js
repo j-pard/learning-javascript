@@ -11,4 +11,25 @@
 
 (() => {
     // your code here
+      function random(min, max) {
+            return Math.floor(Math.random()*max)+min;
+      }
+
+      const target = document.getElementById("target");
+      let str = target.innerHTML;
+      let arr = str.split("");
+
+      target.innerHTML = "";
+ 
+      let k = 0;
+      setInterval(() => {
+            if (k < arr.length) {
+                  let span = document.createElement("span");
+                  span.innerHTML = arr[k];
+                  target.appendChild(span);
+                  k++;
+            }
+            else 
+                  clearInterval();
+      }, random(50, 500));
 })();

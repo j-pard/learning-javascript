@@ -11,4 +11,10 @@
 
 (() => {
     // your code here
+      const target = document.getElementById("target");
+
+      document.getElementById("slider").addEventListener("input", () => {
+            let slider = document.getElementById("slider").value;
+            target.innerHTML = "+32 " + slider;
+      });
 })();
