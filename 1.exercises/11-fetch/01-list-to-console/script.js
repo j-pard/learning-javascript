@@ -11,4 +11,13 @@
 
 (() => {
     // your code here
+      
+      document.getElementById("run").addEventListener("click", () => {
+            fetch("http://localhost:3000/heroes").then( // Connection à l'API et récuperation de la réponse
+                  reponse => reponse.json().then( // Promesse recue en json
+                        heroes => heroes.forEach(hero => { // Tableau JSON reçu + Manipulation de chaque élement
+                              console.log(hero);
+                        })
+                  ));
+      });
 })();

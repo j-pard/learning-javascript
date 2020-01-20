@@ -11,4 +11,22 @@
 
 (() => {
     // your code here
+      const target = document.getElementById("target");
+      const template = document.getElementById("tpl-hero");
+
+      document.getElementById("run").addEventListener("click", () => {
+            target.textContent = "";
+            fetch("http://localhost:3000/heroes").then(
+                  reponse => reponse.json().then(
+                        heroes => heroes.forEach(hero => {
+                              let newTemplate = document.importNode(template.content, true);
+                              newTemplate.querySelector(".name").textContent = hero.name;
+                              newTemplate.querySelector(".alter-ego").textContent = hero.alterEgo;
+                              newTemplate.querySelector(".powers").textContent = hero.abilities;
+
+                              target.appendChild(newTemplate);
+                        })
+                  )
+            )
+      });
 })();

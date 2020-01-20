@@ -10,5 +10,12 @@
 // You will have time to focus on it later.
 
 (() => {
-    // your code here
-})();
+      document.getElementById("run").addEventListener("click", () => {
+          let id = parseInt(document.getElementById("hero-id").value);
+          let url = "http://localhost:3000/heroes/" + id;
+          fetch(url, {
+              method: "DELETE"
+          });
+  
+      });
+  })();
