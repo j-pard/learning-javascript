@@ -11,4 +11,13 @@
 
 (() => {
     // your code here
+      
+      document.getElementById("run").addEventListener("click", async () => {
+            let articles = await window.lib.getPosts();
+            articles.forEach(async (article) => {
+                  let coms = await window.lib.getComments(article.id);
+                  article.comments = coms;
+                  console.log(article);
+            });
+      });
 })();

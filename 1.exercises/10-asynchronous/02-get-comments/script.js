@@ -11,4 +11,28 @@
 
 (() => {
     // your code here
+
+      function getCom(error, articles) {
+            if (error) {
+                  console.log(error);
+            }
+            else {
+                  articles.forEach(el => {
+                        window.lib.getComments(el.id, (error, allComs => { //Prends tous les commentaires
+                              if (error) {
+                                    console.log(error);
+                              }
+                              else {
+                                    let array = allComs; //Ajoute le(s) commentaire(s) associé(s) à l'article
+                                    el.comments = array;
+                              }
+                              console.log(el);
+                        }));
+                  });
+            }
+      }
+
+      document.getElementById("run").addEventListener("click", () => {
+            window.lib.getPosts(getCom);
+      })
 })();

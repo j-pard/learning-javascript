@@ -11,4 +11,20 @@
 
 (() => {
     // your code here
+
+    function test(error, article) {
+      if(error) {
+            console.log(error);
+      }
+      else {
+            article.forEach(el => {
+                  console.log(el);
+            });
+      }
+    }
+
+      document.getElementById("run").addEventListener("click", () => {
+            window.lib.getPosts(test);
+      });
+  
 })();

@@ -11,4 +11,14 @@
 
 (() => {
     // your code here
+
+      document.getElementById("run").addEventListener("click", async () => {
+            let reponse = await window.lib.getPersons();
+            try {
+                  console.log(reponse);
+            }
+            catch(error) {
+                  console.error(error);
+            }
+      });
 })();

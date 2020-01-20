@@ -11,4 +11,19 @@
 
 (() => {
     // your code here
+      document.getElementById("run").addEventListener("click", () => {
+            window.lib.getPosts().then( //Reprend tous les articles
+                  (articles => { // Promesse tenue donc effectue :
+                        articles.forEach(article => {
+                              window.lib.getComments(article.id).then( //Pour chaque article, retourne les commentaires associés
+                                    (coms => { // Promesse tenue donc effectue :
+                                          article.comments = coms; //Associe les commentaires à la propriété "comments" de l'article
+                                    })
+                              );
+                              console.log(article); //Imprime l'article et ses propriétés
+                        });
+                  })
+            );          
+      });
+
 })();

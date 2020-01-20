@@ -70,3 +70,9 @@ From there you will have the *REST API* running on _localhost_ on the port 3000.
 ## Finish ?
 
 ![congratulation](congratulation2.gif)
+
+## Personnal Notes :  
+
+Better to use __Async-Await__ because it's an evolution of __Promise__.  
+__Await__ always return a _promise_.  
+A good pratice is to stock _await-return_ in a _variable_ and check error with __Try & Catch__.
