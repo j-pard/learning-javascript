@@ -1,0 +1,19 @@
+body {
+      width: 100%;
+      overflow: hidden;
+}
+
+header {
+      width: 100%;
+      text-align: center;
+}
+
+main {
+      width: 100%;
+      margin: 100px auto;
+      display: flex;
+      justify-content: center;
+}
+canvas {
+      border: 3px solid #888;
+}
