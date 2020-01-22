@@ -1,0 +1,42 @@
+@import "_reset.scss";
+@import "_mixins.scss";
+@import "_responsive.scss";
+
+body {
+      header {
+            height: 200px;
+      }
+
+      main {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            section#PNJ {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+      
+                  width: 400px;
+                  img {
+                        width: 200px;
+                        height: auto;
+                        margin-bottom: 100px;
+                  }
+      
+                  button {
+                        padding: 8px 16px;
+                        width: max-content;
+                        border-radius: 5px;
+                  }
+            }
+      
+            section#actions {
+                  background-color: #ccc;
+                  width: 400px;
+                  border-radius: 5px;
+                  padding: 20px;
+            }
+      }
+      
+}
