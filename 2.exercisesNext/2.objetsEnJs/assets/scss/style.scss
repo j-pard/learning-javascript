@@ -3,8 +3,32 @@
 @import "_responsive.scss";
 
 body {
+      $boxsize: 60px;
       header {
-            height: 200px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+
+            table {
+                  margin: 20px;
+                  border-collapse: separate;
+                  border-spacing: 10px;
+                  tr {
+                        td {
+                              width: $boxsize;
+                              height: $boxsize;
+                              border: 1px solid gray;
+                              box-shadow: 3px 3px 3px gray;
+                              border-radius: 5px;
+
+                              background-size: cover;
+                              background-position: center;
+                              background-repeat: no-repeat;
+                        }
+                  }
+            }
       }
 
       main {
@@ -12,31 +36,44 @@ body {
             display: flex;
             flex-direction: row;
             justify-content: center;
-            section#PNJ {
+
+            section {
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-      
                   width: 400px;
+                  height: 400px;
+
                   img {
-                        width: 200px;
-                        height: auto;
+                        width: auto;
+                        height: 270px;
                         margin-bottom: 100px;
                   }
-      
-                  button {
-                        padding: 8px 16px;
-                        width: max-content;
+
+                  #actions {
+                        background-color: #ccc;
+                        overflow-y: scroll;
                         border-radius: 5px;
+                        padding: 20px;
+                        text-align: center;
+                        width: 100%;
+                        height: 100%;
+                        margin-bottom: 100px;
+
+                        p#what {
+                              font-size: 120%;
+                              margin: 10px auto;
+                              font-style: italic;
+                        }
                   }
             }
-      
-            section#actions {
-                  background-color: #ccc;
-                  width: 400px;
-                  border-radius: 5px;
-                  padding: 20px;
-            }
+
+      }
+
+      button {
+            padding: 8px 16px;
+            width: max-content;
+            border-radius: 5px;
       }
       
 }

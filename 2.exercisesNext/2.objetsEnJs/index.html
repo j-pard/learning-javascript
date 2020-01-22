@@ -10,7 +10,23 @@
       <title>Little RPG</title>
 </head>
 <body>
-      <header></header>
+      <header>
+            <h1>Little Story</h1>
+            <table>
+                  <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                  </tr>
+            </table>
+            <div>
+                  <button class="shopBtns" id="btnShop1">Tous les objets</button>
+                  <button class="shopBtns" id="btnShop2">Objets disponibles</button>
+                  <button class="shopBtns" id="btnShop3">Objets supérieurs</button>
+            </div>
+      </header>
       <main>
             <section id="PNJ">
                   <h3 id="pnjName"></h3>
@@ -19,10 +35,16 @@
                   <button id="giveBtn">Give me stuff !</button>
             </section>
       
-            <section id="actions">
-                  <p id="who"></p>
-                  <p id="what"></p>
-                  <p id="care"></p>
+            <section>
+                  <article id="actions"></article>
+                  <button id="clear">Clear</button>
+            </section>
+
+            <section id="avatar">
+                  <h3 id="avatarName"></h3>
+                  <h4 id="avatarJob"></h4>
+                  <img id="avatarImg" src="./assets/img/avatar.svg" alt="">
+                  <button id="attackBtn">Attaquer</button>
             </section>
       </main>
 
