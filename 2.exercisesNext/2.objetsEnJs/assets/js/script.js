@@ -26,8 +26,6 @@
             name: "George",
             title: "Le Généreux",
             age: 40,
-            hp: "-",
-            maxHp: "-",
             image: "./assets/img/vendor.svg",
             items_to_give: [
                   {
@@ -72,7 +70,6 @@
                   document.getElementById("pnjName").textContent = this.name;
                   document.getElementById("pnjTitle").textContent = this.title;
                   document.getElementById("pnjImg").setAttribute("src", this.image);
-                  document.getElementById("pnjHP").textContent = `${this.hp} / ${this.maxHp}`;
             }
       };
 
@@ -179,6 +176,9 @@
                         let date = new Date;
                         let hours = date.getHours();
                         let mins = date.getMinutes();
+                        if (mins < 10) {
+                              mins = "0" + mins
+                        }
                         talk("Attaque secrète : KELLER !!");
                         talk("Wood absorbe l'espace temps et le renvoie sous forme d'énergie pure :");
                         talk(`L'instant exacte ${hours}H${mins} disparaît de l'histoire.`);
@@ -255,6 +255,17 @@
             }
        };
 
+       const startFight = () => {
+            mobGen();
+       };
+
+       const mobGen = () => {
+            let adjust = Math.floor(Math.random() * 3);
+            adjust -= 1;
+            let mob = new Mobs(adjust);
+            mob.introduce();
+       };
+
        // RUNNING ----------------------------------------------------------------------
 
       vendor.introduce();
@@ -289,6 +300,8 @@
                               vendor.areIn = false;
                               town.current = "center";
                               advBtn.disabled = false;
+                              talk("La queue entre les jambes, vous retournez au village.");
+                              talk("-");
                               break;
                         case "goVendor":
                               vendor.areIn = true;
@@ -311,6 +324,11 @@
                               adventure.areIn = true;
                               talk("Vous partez à l'aventure !");
                               talk("-");
+
+                              // COMBATS
+                              startFight();
+
+                              // ---------
                               break;
                   }
 
@@ -320,6 +338,7 @@
                   showHide(pnjSection, "none", false);
                   showHide(shopSection, "none", false);
                   showHide(centerSection, "none", false);
+                  showHide(mobSection, "none", false);
                   townBtn.textContent = "Bienvenue en ville";
                   townBtn.disabled = true;
                   vendorBtn.disabled = false;
