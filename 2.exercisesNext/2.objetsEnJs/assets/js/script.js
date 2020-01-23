@@ -14,7 +14,7 @@
       const pnjSection = document.getElementById("PNJ");
       const shopSection = document.getElementById("shop");
       const centerSection = document.getElementById("center");
-      const advSection = document.getElementById("adventure");
+      const mobSection = document.getElementById("MOBS");
 
       const adventure = {
             positions: ["forest"],
@@ -200,6 +200,35 @@
             }
        };
 
+       class Mobs {
+            constructor(adjust) { //Adjust est un nombre aléatoire -1, 0, 1 pour ajuste aléatoirement le niveau du mob
+                  this.level = parseInt(mainCharacter.level + adjust);
+                  this.degats = parseInt(this.level * 10);
+                  this.maxHp = parseInt(50 + (this.level * 10));
+                  this.hp = this.maxHp;
+
+                  if(adjust < 0) {
+                        this.name = "Gobelin";
+                        this.image = "./assets/img/goblin.png";
+                  }
+                  else if(adjust > 0) {
+                        this.name = "Troll";
+                        this.image = "./assets/img/troll.png";
+                  }
+                  else {
+                        this.name = "Orc";
+                        this.image = "./assets/img/orc.png";
+                  }
+            };
+            introduce() {
+                  document.getElementById("mobName").textContent = this.name;
+                  document.getElementById("mobLvl").textContent = `Lvl: ${this.level}`;
+                  document.getElementById("mobImg").setAttribute("src", this.image);
+                  document.getElementById("mobHp").textContent = `${this.hp} / ${this.maxHp}`;
+            }
+            
+       };
+
        const talk = (str) => {
             let p = document.createElement("p");
             if(str == "-") {
@@ -291,12 +320,14 @@
                   showHide(pnjSection, "none", false);
                   showHide(shopSection, "none", false);
                   showHide(centerSection, "none", false);
-                  showHide(advSection, "none", false);
                   townBtn.textContent = "Bienvenue en ville";
                   townBtn.disabled = true;
                   vendorBtn.disabled = false;
                   shopBtn.disabled = false; 
                   attackBtn.disabled = false;
+
+
+                  showHide(debug, "none", false); // ____________________________DEBUG________________________________
                   
                   if (town.current == "vendor") {
                         showHide(pnjSection, "flex", false);
@@ -328,11 +359,14 @@
                   showHide(pnjSection, "none", false);
                   showHide(shopSection, "none", false);
                   showHide(centerSection, "none", false);
-                  showHide(advSection, "block", false);
                   townBtn.textContent = "Fuir comme un lâche !";
                   townBtn.disabled = false;
                   advBtn.disabled = true;
                   attackBtn.disabled = false;
+
+
+                  showHide(debug, "block", false); // ____________________________DEBUG________________________________
+                  showHide(mobSection, "flex", false); 
             }
             });
       });
@@ -350,4 +384,14 @@
                   })
       }));      
       
+
+      // DEBUG
+
+      const debug = document.getElementById("debug");
+      document.getElementById("addMob").addEventListener("click", () => {
+            let adjust = Math.floor(Math.random() * 3);
+            adjust -= 1;
+            let mob = new Mobs(adjust);
+            mob.introduce();
+      });
 })();

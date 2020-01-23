@@ -30,7 +30,6 @@ body {
       margin: auto 30px; }
       body main section h2 {
         font-style: italic;
-        color: #666;
         text-align: center; }
       body main section h3 {
         font-style: italic;
@@ -110,6 +109,15 @@ body {
 
 .not-in {
   display: none; }
+
+#debug {
+  display: none; }
+  #debug button {
+    padding: 0;
+    font-size: 10px;
+    color: aqua;
+    border: none;
+    background: transparent; }
 
 .not-displayed {
   display: none; }
