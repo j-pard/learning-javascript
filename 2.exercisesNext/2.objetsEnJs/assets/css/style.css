@@ -8,56 +8,110 @@ body {
   width: 100%; }
 
 /*# sourceMappingURL=style.css.map */
-body header {
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px; }
-  body header table {
-    margin: 20px;
-    border-collapse: separate;
-    border-spacing: 10px; }
-    body header table tr td {
-      width: 60px;
-      height: 60px;
-      border: 1px solid gray;
-      box-shadow: 3px 3px 3px gray;
-      border-radius: 5px;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat; }
-body main {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center; }
-  body main section {
+body {
+  height: 100vh; }
+  body header {
+    height: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;
-    height: 400px; }
-    body main section img {
-      width: auto;
-      height: 270px;
-      margin-bottom: 100px; }
-    body main section #actions {
-      background-color: #ccc;
-      overflow-y: scroll;
-      border-radius: 5px;
-      padding: 20px;
-      text-align: center;
-      width: 100%;
-      height: 100%;
-      margin-bottom: 100px; }
-      body main section #actions p#what {
+    padding: 20px; }
+  body main {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center; }
+    body main section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 400px;
+      height: 400px;
+      margin: auto 30px; }
+      body main section h2 {
+        font-style: italic;
+        color: #666;
+        text-align: center; }
+      body main section h3 {
+        font-style: italic;
+        color: #666; }
+      body main section img {
+        width: auto;
+        max-width: 90%;
+        height: 270px;
+        margin: 20px 0; }
+      body main section .hp {
+        margin-bottom: 20px;
         font-size: 120%;
-        margin: 10px auto;
-        font-style: italic; }
-body button {
-  padding: 8px 16px;
-  width: max-content;
-  border-radius: 5px; }
+        font-weight: bold;
+        color: red; }
+      body main section #actions {
+        background-color: #ccc;
+        overflow-y: scroll;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 100px; }
+        body main section #actions p#what {
+          font-size: 120%;
+          margin: 10px auto;
+          font-style: italic; }
+    body main section#shop table {
+      margin: 20px;
+      border-collapse: separate;
+      border-spacing: 10px; }
+      body main section#shop table tr td {
+        width: 60px;
+        height: 60px;
+        border: 1px solid gray;
+        box-shadow: 3px 3px 3px gray;
+        border-radius: 5px;
+        background-color: white;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat; }
+    body main section#shop div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
+      body main section#shop div button {
+        margin: 10px auto; }
+  body footer {
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center; }
+    body footer div {
+      flex-direction: column;
+      justify-content: flex-start;
+      text-align: center;
+      align-items: center; }
+    body footer #town {
+      width: 50%;
+      display: flex; }
+      body footer #town div#townBtns {
+        margin-top: 20px; }
+        body footer #town div#townBtns button.townDir {
+          margin: 0 10px; }
+    body footer #fight {
+      width: 50%; }
+  body button {
+    padding: 8px 16px;
+    width: max-content;
+    height: max-content;
+    border-radius: 5px; }
+
+.not-in {
+  display: none; }
+
+.not-displayed {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */
