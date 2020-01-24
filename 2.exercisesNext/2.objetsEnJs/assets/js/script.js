@@ -29,7 +29,7 @@
             image: "./assets/img/vendor.svg",
             items_to_give: [
                   {
-                        title: "Epée en plume",
+                        title: "Epée en bois",
                         gave: false
                   },
                   {
@@ -87,7 +87,7 @@
                         physic: 10,
                         magic: 0,
                         minLevel: 0,
-                        available: true,
+                        available: false,
                         legend: "Même un bébé pourrait s'en servir !",
                         image: "./assets/img/wooden_sword.jpg"
                   },
@@ -172,6 +172,7 @@
             position: "town",
             attack: function() {
                   let dice = (Math.floor(Math.random() * 11) + 1);
+                  let totalDegats = 0;
                   if (dice == 10) {
                         let date = new Date;
                         let hours = date.getHours();
@@ -182,15 +183,17 @@
                         talk("Attaque secrète : KELLER !!");
                         talk("Wood absorbe l'espace temps et le renvoie sous forme d'énergie pure :");
                         talk(`L'instant exacte ${hours}H${mins} disparaît de l'histoire.`);
-                        let totalDegats = parseInt(hours.toString() + mins.toString());
+                        totalDegats = parseInt(hours.toString() + mins.toString());
                         talk(`L'ennemi subit ${totalDegats} de dégats temporels.`);
                         talk("-");
+                        
                   }
                   else {
-                        let totalDegats = (this.level * (this.weapon.physic + this.weapon.magic));
+                        totalDegats = (this.level * (this.weapon.physic + this.weapon.magic));
                         talk(`${this.name} attaque avec l'arme "${this.weapon.title} et inflige ${totalDegats} de dégats !`);
                         talk("-");
                   }
+                  return totalDegats;
             },
             introduce: function() {
                   document.getElementById("avatarName").textContent = this.name;
@@ -204,6 +207,9 @@
             constructor(adjust) { //Adjust est un nombre aléatoire -1, 0, 1 pour ajuste aléatoirement le niveau du mob
                   this.level = parseInt(mainCharacter.level + adjust);
                   this.degats = parseInt(this.level * 10);
+                  if(this.degats == 0) {
+                        this.degats = 5;
+                  }
                   this.maxHp = parseInt(50 + (this.level * 10));
                   this.hp = this.maxHp;
 
@@ -226,7 +232,17 @@
                   document.getElementById("mobImg").setAttribute("src", this.image);
                   document.getElementById("mobHp").textContent = `${this.hp} / ${this.maxHp}`;
             }
-            
+            attack() {
+                  if(this.hp > 0) {
+                        talk(`${this.name} attaque le héro et inflige ${this.degats} de dégats !`);
+                        talk("-");
+                        return this.degats;
+                  }
+                  else {
+                        this.degats = 0;
+                        return 0;
+                  }
+            }
        };
 
        const talk = (str) => {
@@ -255,16 +271,40 @@
             }
        };
 
-       const startFight = () => {
-            mobGen();
-       };
-
        const mobGen = () => {
             let adjust = Math.floor(Math.random() * 3);
             adjust -= 1;
             let mob = new Mobs(adjust);
             mob.introduce();
+            return mob;
        };
+
+       const startFight = () => {  
+            if(mainCharacter.hp > 0) {
+                  mob = mobGen();
+
+                  attackBtn.addEventListener("click", () => {
+                        mob.hp -= mainCharacter.attack();
+                        mob.introduce();
+                        mainCharacter.hp -= mob.attack();
+                        mainCharacter.introduce();
+                        
+                        if(mainCharacter.hp > 0 && mob.hp <= 0) {
+                              talk("Vous êtes venu à bout du monstre !");
+                              talk("Mais combien sont-ils ?! Un nouveau monstre surgit devant vous !");
+                              startFight();
+                        }
+                        else if (mainCharacter.hp <= 0 && mob.hp > 0) {
+                              talk("Visiblement, vous n'étiez pas à la hauteur.")
+                              talk("-");
+                              talk("SHAME ON YOU");
+                              town.areIn = true;
+                              adventure.areIn = false;
+                        } 
+                  });
+            }                          
+
+      };
 
        // RUNNING ----------------------------------------------------------------------
 
@@ -290,9 +330,6 @@
                         case "btnShop3":
                               shop.showSuperior();
                               break;
-                        case "attackBtn":
-                              mainCharacter.attack();
-                              break;
                         case "goTown":
                               town.areIn = true;
                               adventure.areIn = false;
@@ -301,7 +338,10 @@
                               town.current = "center";
                               advBtn.disabled = false;
                               talk("La queue entre les jambes, vous retournez au village.");
+                              talk("Vous mendiez de l'aide lorsqu'une prêtresse vous rejoins et vous soigne en échange du peu d'honneur qu'il vous restait.")
                               talk("-");
+                              mainCharacter.hp = mainCharacter.maxHp;
+                              mainCharacter.introduce();
                               break;
                         case "goVendor":
                               vendor.areIn = true;
@@ -324,10 +364,9 @@
                               adventure.areIn = true;
                               talk("Vous partez à l'aventure !");
                               talk("-");
-
                               // COMBATS
                               startFight();
-
+   
                               // ---------
                               break;
                   }
