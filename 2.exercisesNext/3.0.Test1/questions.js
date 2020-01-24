@@ -71,12 +71,12 @@ let tailleString = (texte) => {
         return array;
   }
   let sufaceCercle =  (rayon) => {
-  
+      return Math.round(Math.PI * Math.pow(rayon, 2));
   }
   let hypothenuse =  (ab, ac) => {
-  
+      return Math.sqrt(Math.pow(ab, 2) + Math.pow(ac, 2));
   }
   let calculIMC =  (poids, taille) => {
-  
+      return parseFloat(((poids) / (Math.pow(taille, 2))).toFixed(2));
   }
   
