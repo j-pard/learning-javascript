@@ -141,15 +141,31 @@ let getElementsUntilGreaterThanFive = (array) => {
 }
 
 let convertArrayToObject = (array) => {
-    return 'Write your method here';
+      let entries = [];
+      for(let i=0; i<=4; i+=2) {
+            let entry = [array[i], array[i+1]];
+            entries.push(entry);
+      }
+      let obj = Object.fromEntries(entries);
+      return obj;
 }
 
 let getAllLetters = (array) => {
-    return 'Write your method here';
+      let letters = array.join("");
+      letters = new Set(Array.from(letters).sort());
+      return Array.from(letters);
 }
 
 let swapKeysAndValues = (object) => {
-    return 'Write your method here';
+      let swapped = [];
+      Object.entries(object).forEach(pair => {
+            let a = pair[0];
+            let b = pair[1];
+            pair[0] = b;
+            pair[1] = a;
+            swapped.push(pair);
+      });
+      return Object.fromEntries(swapped);
 }
 
 let sumKeysAndValues = (object) => {
