@@ -259,13 +259,31 @@ let factorial = (number) => {
 }
 
 let findAnagrams = (string) => {
-    return 'Write your method here';
+      let anagrams = [];
+      const genAnagrams = (word, anagram = '') => {
+            if (!word) {
+                  anagrams.push(anagram);
+            }
+            for(let i=0; i<word.length; i++) {
+                  anagram += word[i];
+                  genAnagrams(word.slice(0, i) + word.slice(i+1), anagram);
+                  anagram = anagram.slice(0, anagram.length -1);
+            }
+      }
+      genAnagrams(string, anagram = '');
+      return anagrams;
 }
 
 let convertToCelsius = (number) => {
-    return 'Write your method here';
+      return Math.round((number-32)*(5/9));
 }
 
 let letterPosition = (array) => {
-    return 'Write your method here';
+      const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+      let positions = [];
+      array.forEach(letter => {
+            let index = (alphabet.indexOf(letter.toLowerCase())+1);
+            positions.push(index);
+      });
+      return positions;
 }
