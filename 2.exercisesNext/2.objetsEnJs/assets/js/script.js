@@ -14,7 +14,7 @@
       const pnjSection = document.getElementById("PNJ");
       const shopSection = document.getElementById("shop");
       const centerSection = document.getElementById("center");
-      const advSection = document.getElementById("adventure");
+      const mobSection = document.getElementById("MOBS");
 
       const adventure = {
             positions: ["forest"],
@@ -26,12 +26,10 @@
             name: "George",
             title: "Le Généreux",
             age: 40,
-            hp: "-",
-            maxHp: "-",
             image: "./assets/img/vendor.svg",
             items_to_give: [
                   {
-                        title: "Epée en plume",
+                        title: "Epée en bois",
                         gave: false
                   },
                   {
@@ -72,7 +70,6 @@
                   document.getElementById("pnjName").textContent = this.name;
                   document.getElementById("pnjTitle").textContent = this.title;
                   document.getElementById("pnjImg").setAttribute("src", this.image);
-                  document.getElementById("pnjHP").textContent = `${this.hp} / ${this.maxHp}`;
             }
       };
 
@@ -90,7 +87,7 @@
                         physic: 10,
                         magic: 0,
                         minLevel: 0,
-                        available: true,
+                        available: false,
                         legend: "Même un bébé pourrait s'en servir !",
                         image: "./assets/img/wooden_sword.jpg"
                   },
@@ -175,28 +172,76 @@
             position: "town",
             attack: function() {
                   let dice = (Math.floor(Math.random() * 11) + 1);
+                  let totalDegats = 0;
                   if (dice == 10) {
                         let date = new Date;
                         let hours = date.getHours();
                         let mins = date.getMinutes();
+                        if (mins < 10) {
+                              mins = "0" + mins
+                        }
                         talk("Attaque secrète : KELLER !!");
                         talk("Wood absorbe l'espace temps et le renvoie sous forme d'énergie pure :");
                         talk(`L'instant exacte ${hours}H${mins} disparaît de l'histoire.`);
-                        let totalDegats = parseInt(hours.toString() + mins.toString());
+                        totalDegats = parseInt(hours.toString() + mins.toString());
                         talk(`L'ennemi subit ${totalDegats} de dégats temporels.`);
                         talk("-");
+                        
                   }
                   else {
-                        let totalDegats = (this.level * (this.weapon.physic + this.weapon.magic));
+                        totalDegats = (this.level * (this.weapon.physic + this.weapon.magic));
                         talk(`${this.name} attaque avec l'arme "${this.weapon.title} et inflige ${totalDegats} de dégats !`);
                         talk("-");
                   }
+                  return totalDegats;
             },
             introduce: function() {
                   document.getElementById("avatarName").textContent = this.name;
                   document.getElementById("avatarTitle").textContent = this.title;
                   document.getElementById("avatarImg").setAttribute("src", this.image);
                   document.getElementById("avatarHP").textContent = `${this.hp} / ${this.maxHp}`;
+            }
+       };
+
+       class Mobs {
+            constructor(adjust) { //Adjust est un nombre aléatoire -1, 0, 1 pour ajuste aléatoirement le niveau du mob
+                  this.level = parseInt(mainCharacter.level + adjust);
+                  this.degats = parseInt(this.level * 10);
+                  if(this.degats == 0) {
+                        this.degats = 5;
+                  }
+                  this.maxHp = parseInt(50 + (this.level * 10));
+                  this.hp = this.maxHp;
+
+                  if(adjust < 0) {
+                        this.name = "Gobelin";
+                        this.image = "./assets/img/goblin.png";
+                  }
+                  else if(adjust > 0) {
+                        this.name = "Troll";
+                        this.image = "./assets/img/troll.png";
+                  }
+                  else {
+                        this.name = "Orc";
+                        this.image = "./assets/img/orc.png";
+                  }
+            };
+            introduce() {
+                  document.getElementById("mobName").textContent = this.name;
+                  document.getElementById("mobLvl").textContent = `Lvl: ${this.level}`;
+                  document.getElementById("mobImg").setAttribute("src", this.image);
+                  document.getElementById("mobHp").textContent = `${this.hp} / ${this.maxHp}`;
+            }
+            attack() {
+                  if(this.hp > 0) {
+                        talk(`${this.name} attaque le héro et inflige ${this.degats} de dégats !`);
+                        talk("-");
+                        return this.degats;
+                  }
+                  else {
+                        this.degats = 0;
+                        return 0;
+                  }
             }
        };
 
@@ -226,6 +271,41 @@
             }
        };
 
+       const mobGen = () => {
+            let adjust = Math.floor(Math.random() * 3);
+            adjust -= 1;
+            let mob = new Mobs(adjust);
+            mob.introduce();
+            return mob;
+       };
+
+       const startFight = () => {  
+            if(mainCharacter.hp > 0) {
+                  mob = mobGen();
+
+                  attackBtn.addEventListener("click", () => {
+                        mob.hp -= mainCharacter.attack();
+                        mob.introduce();
+                        mainCharacter.hp -= mob.attack();
+                        mainCharacter.introduce();
+                        
+                        if(mainCharacter.hp > 0 && mob.hp <= 0) {
+                              talk("Vous êtes venu à bout du monstre !");
+                              talk("Mais combien sont-ils ?! Un nouveau monstre surgit devant vous !");
+                              startFight();
+                        }
+                        else if (mainCharacter.hp <= 0 && mob.hp > 0) {
+                              talk("Visiblement, vous n'étiez pas à la hauteur.")
+                              talk("-");
+                              talk("SHAME ON YOU");
+                              town.areIn = true;
+                              adventure.areIn = false;
+                        } 
+                  });
+            }                          
+
+      };
+
        // RUNNING ----------------------------------------------------------------------
 
       vendor.introduce();
@@ -250,9 +330,6 @@
                         case "btnShop3":
                               shop.showSuperior();
                               break;
-                        case "attackBtn":
-                              mainCharacter.attack();
-                              break;
                         case "goTown":
                               town.areIn = true;
                               adventure.areIn = false;
@@ -260,6 +337,11 @@
                               vendor.areIn = false;
                               town.current = "center";
                               advBtn.disabled = false;
+                              talk("La queue entre les jambes, vous retournez au village.");
+                              talk("Vous mendiez de l'aide lorsqu'une prêtresse vous rejoins et vous soigne en échange du peu d'honneur qu'il vous restait.")
+                              talk("-");
+                              mainCharacter.hp = mainCharacter.maxHp;
+                              mainCharacter.introduce();
                               break;
                         case "goVendor":
                               vendor.areIn = true;
@@ -282,6 +364,10 @@
                               adventure.areIn = true;
                               talk("Vous partez à l'aventure !");
                               talk("-");
+                              // COMBATS
+                              startFight();
+   
+                              // ---------
                               break;
                   }
 
@@ -291,12 +377,15 @@
                   showHide(pnjSection, "none", false);
                   showHide(shopSection, "none", false);
                   showHide(centerSection, "none", false);
-                  showHide(advSection, "none", false);
+                  showHide(mobSection, "none", false);
                   townBtn.textContent = "Bienvenue en ville";
                   townBtn.disabled = true;
                   vendorBtn.disabled = false;
                   shopBtn.disabled = false; 
                   attackBtn.disabled = false;
+
+
+                  showHide(debug, "none", false); // ____________________________DEBUG________________________________
                   
                   if (town.current == "vendor") {
                         showHide(pnjSection, "flex", false);
@@ -328,11 +417,14 @@
                   showHide(pnjSection, "none", false);
                   showHide(shopSection, "none", false);
                   showHide(centerSection, "none", false);
-                  showHide(advSection, "block", false);
                   townBtn.textContent = "Fuir comme un lâche !";
                   townBtn.disabled = false;
                   advBtn.disabled = true;
                   attackBtn.disabled = false;
+
+
+                  showHide(debug, "block", false); // ____________________________DEBUG________________________________
+                  showHide(mobSection, "flex", false); 
             }
             });
       });
@@ -350,4 +442,14 @@
                   })
       }));      
       
+
+      // DEBUG
+
+      const debug = document.getElementById("debug");
+      document.getElementById("addMob").addEventListener("click", () => {
+            let adjust = Math.floor(Math.random() * 3);
+            adjust -= 1;
+            let mob = new Mobs(adjust);
+            mob.introduce();
+      });
 })();
