@@ -174,8 +174,23 @@
             image: "./assets/img/avatar.svg",
             position: "town",
             attack: function() {
-                  let totalDegats = (this.level * (this.weapon.physic + this.weapon.magic));
-                  talk(`${this.name} attaque avec l'arme "${this.weapon.title} et inflige ${totalDegats} de dégats !`);
+                  let dice = (Math.floor(Math.random() * 11) + 1);
+                  if (dice == 10) {
+                        let date = new Date;
+                        let hours = date.getHours();
+                        let mins = date.getMinutes();
+                        talk("Attaque secrète : KELLER !!");
+                        talk("Wood absorbe l'espace temps et le renvoie sous forme d'énergie pure :");
+                        talk(`L'instant exacte ${hours}H${mins} disparaît de l'histoire.`);
+                        let totalDegats = parseInt(hours.toString() + mins.toString());
+                        talk(`L'ennemi subit ${totalDegats} de dégats temporels.`);
+                        talk("-");
+                  }
+                  else {
+                        let totalDegats = (this.level * (this.weapon.physic + this.weapon.magic));
+                        talk(`${this.name} attaque avec l'arme "${this.weapon.title} et inflige ${totalDegats} de dégats !`);
+                        talk("-");
+                  }
             },
             introduce: function() {
                   document.getElementById("avatarName").textContent = this.name;
