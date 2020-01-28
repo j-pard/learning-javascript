@@ -169,39 +169,93 @@ let swapKeysAndValues = (object) => {
 }
 
 let sumKeysAndValues = (object) => {
-    return 'Write your method here';
+      let count = 0;
+    Object.entries(object).forEach(partial => {
+          partial.forEach(val => {
+            count += parseInt(val);
+          });
+    });
+    return count;
 }
 
 let removeCapitals = (string) => {
-    return 'Write your method here';
+    let arr = Array.from(string);
+    arr.forEach(letter => {
+      if(arr.includes(letter.toUpperCase()) && letter != " ") {
+            arr.splice(arr.indexOf(letter), 1);
+      }
+    });
+    string = arr.join("");
+    return string;
 }
 
 let roundUp = (number) => {
-    return 'Write your method here';
+    let rounded = Math.round(number);
+    if(rounded <= number) {
+          rounded++;
+    }
+    return rounded
 }
 
 let formatDateNicely = (date) => {
-    return 'Write your method here';
+      let day = "0" + date.getDate();
+      let month = "0" + (date.getMonth()+1);
+      let year = date.getFullYear();
+      return (day + "/" + month + "/" + year);
 }
 
 let getDomainName = (string) => {
-    return 'Write your method here';
+      let arr = string.split("@");
+      let answer = arr[1].split(".com");
+      return answer[0];
 }
 
 let titleize = (string) => {
-    return 'Write your method here';
+//Expected 'the lion the witch and the wardrobe' to equal 'The Lion the Witch and the Wardrobe'.
+      let arr = string.split(" ");
+      for(let i=0; i<arr.length; i++) {
+            if(i == 0) {
+                  let letters = arr[i].split("");
+                  letters[0] = (letters[0]).toUpperCase();
+                  let reWord = letters.join("");
+                  arr.splice(arr.indexOf(arr[i]), 1, reWord);
+            }
+            else if (arr[i] != "the" && arr[i] != "and") {
+                  let letters = arr[i].split("");
+                  letters[0] = (letters[0]).toUpperCase();
+                  let reWord = letters.join("");
+                  arr.splice(arr.indexOf(arr[i]), 1, reWord);
+
+                  if(letters[(letters.length)-1] == ".") {
+                        let letters = arr[i+1].split("");
+                        letters[0] = (letters[0]).toUpperCase();
+                        let reWord = letters.join("");
+                        arr.splice(arr.indexOf(arr[i+1]), 1, reWord);
+                  }
+            }
+      }
+      return (arr.join(" "));
 }
 
 let checkForSpecialCharacters = (string) => {
-    return 'Write your method here';
+      if (string.includes("@") || string.includes("!")) {
+            return true;
+      }
+      else {
+            return false;
+      }
 }
 
 let squareRoot = (number) => {
-    return 'Write your method here';
+      return Math.sqrt(number);
 }
 
 let factorial = (number) => {
-    return 'Write your method here';
+      let count = 1;
+      for(let i=1; i<=number; i++) {
+            count = count *= i;
+      }
+      return count;
 }
 
 let findAnagrams = (string) => {
