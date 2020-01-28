@@ -10,21 +10,74 @@
       <title>Little RPG</title>
 </head>
 <body>
-      <header></header>
+      <header>
+            <h1>Little RPG</h1>
+      </header>
+
       <main>
             <section id="PNJ">
-                  <h3 id="pnjName"></h3>
-                  <h4 id="pnjJob"></h4>
-                  <img id="pnjImg" src="./assets/img/vendor.svg" alt="">
+                  <h2 id="pnjName"></h2>
+                  <h3 id="pnjTitle"></h3>
+                  <img id="pnjImg" src="" alt="">
+                  <p id="pnjHP" class="hp"></p>
                   <button id="giveBtn">Give me stuff !</button>
             </section>
+
+            <section id="shop" class="not-in">
+                  <h2>Magasin</h2>
+                        <table>
+                              <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                              </tr>
+                        </table>
+                        <div>
+                              <button class="shopBtns" id="btnShop1">Tous les objets</button>
+                              <button class="shopBtns" id="btnShop2">Objets disponibles</button>
+                              <button class="shopBtns" id="btnShop3">Objets supérieurs</button>
+                        </div>
+            </section>
+
+            <section id="center" class="not-in">
+                  <h2>Centre ville</h2>
+            </section>
+
+            <section id="adventure" class="not-in">
+                  <h2>Quelque part en forêt</h2>
+            </section>
       
-            <section id="actions">
-                  <p id="who"></p>
-                  <p id="what"></p>
-                  <p id="care"></p>
+            <section>
+                  <h2 class="not-displayed"></h2>
+                  <article id="actions">
+                        <h3>Historique :</h3>
+                  </article>
+                  <button id="clear">Clear</button>
+            </section>
+
+            <section id="avatar">
+                  <h2 id="avatarName"></h2>
+                  <h3 id="avatarTitle"></h3>
+                  <img id="avatarImg" src="" alt="">
+                  <p id="avatarHP" class="hp"></p>
+                  <button id="attackBtn" disabled>Attaquer</button>
             </section>
       </main>
+
+      <footer>
+            <div id="town">
+                  <button id="goTown" disabled>Bienvenue en ville</button>
+                  <div id="townBtns">
+                        <button id="goVendor" class="townDir" disabled>Se promener en ville</button>
+                        <button id="goShop" class="townDir">Se rendre à l'échoppe</button>
+                  </div>
+            </div>
+            <div id="fight">
+                  <button id="goAdventure" disabled>Partir à l'aventure</button>
+            </div>
+      </footer>
 
       <script src="./assets/js/script.js"></script>
 </body>
