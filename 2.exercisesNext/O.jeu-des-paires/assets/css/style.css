@@ -23,12 +23,20 @@ body {
     body main #board .cards {
       margin: 10px;
       padding: 10px;
+      cursor: pointer;
       width: 170px;
       height: 250px;
       border: 2px solid black;
       border-radius: 10px;
       background-position: center;
-      background-size: contain;
-      background-repeat: no-repeat; }
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: url("../img/back.jpg");
+      transform: rotateY(180deg);
+      transition: all 1.5s; }
+      body main #board .cards h3 {
+        display: none; }
+    body main #board .returned {
+      transform: rotateY(0); }
 
 /*# sourceMappingURL=style.css.map */

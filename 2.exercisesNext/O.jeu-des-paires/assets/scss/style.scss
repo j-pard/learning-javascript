@@ -22,8 +22,13 @@ body {
                   flex-wrap: wrap;
       
                   .cards {
+                        h3 {
+                              display: none;
+                        }
+
                         margin: 10px;
                         padding: 10px;
+                        cursor: pointer;
       
                         width: 170px;
                         height: 250px;
@@ -32,8 +37,16 @@ body {
                         border-radius: 10px;
 
                         background-position: center;
-                        background-size: contain;
+                        background-size: cover;
                         background-repeat: no-repeat;
+                        background-image: url("../img/back.jpg");
+
+                        transform: rotateY(180deg);
+                        transition: all 1.5s;
+                  }
+
+                  .returned {
+                        transform: rotateY(0);
                   }
             }
       }

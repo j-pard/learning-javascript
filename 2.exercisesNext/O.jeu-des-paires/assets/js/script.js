@@ -17,7 +17,9 @@
       ];
 
       let usedPositions = [];
-      
+      let activeCards = 0;     
+      let validation = []; 
+      const cardDuration = 220;
 
       const MODELS = [
             {
@@ -59,7 +61,8 @@
 
             init() {
                   document.querySelector(`#${this.position} h3`).textContent = this.name;
-                  document.querySelector(`#${this.position}`).style.backgroundImage = `url(${this.image})`;
+                  document.querySelector(`#${this.position}`).setAttribute("secondary-background", this.image);
+                  document.querySelector(`#${this.position}`).style.backgroundImage = `url(./assets/img/back.jpg)`;
             }
       };
 
@@ -89,11 +92,68 @@
             }
       };
 
+      const resetCards = () => {
+            activeCards = 0;
+            validation = [];
+            POSITIONS.forEach(card => {
+                  if(!card.classList.contains("validated")) {
+                        card.classList.remove("returned");
+                        setTimeout(() => {
+                              card.style.backgroundImage = "url('./assets/img/back.jpg')";
+                        }, cardDuration);
+                  }
+            });
+      };
+
+      const returnCard =(card) => {
+            card.classList.toggle("returned");
+            setTimeout(() => {
+                  card.style.backgroundImage = `url(${card.getAttribute("secondary-background")}`;
+            }, cardDuration);
+      }
+
       genCards();
 
-
-      // DEBUG
-      document.getElementById("RUN").addEventListener("click", () => {
+      POSITIONS.forEach(card => {
+            card.addEventListener("click", () => {
+                  if(activeCards >= 2) {
+                        resetCards();
+                  }
+                  else {
+                        activeCards++;
+                        returnCard(card);
+                        if(!validation.length) {
+                              validation.push(card); 
+                              console.log("Was empty and you add : " + validation[0].id);
+                        }
+                        else if(validation.length > 0) {
+                              console.log("Validation contains : " + validation[0].id + " and you want to add : " + card.id)
+                              if (validation[0].id != card.id) {
+                                    validation.push(card);
+                                    console.log(card.id + " was added.");
+                                    if (validation[0].textContent == validation[1].textContent) {
+                                          console.log("Cards paired, congrats !");
+                                          validation[0].classList.add("validated");
+                                          validation[1].classList.add("validated");
+                                          setTimeout(() => {
+                                                resetCards();
+                                          }, 1000);
+                                    }
+                                    else {
+                                          console.log("Not paired cards");
+                                          setTimeout(() => {
+                                                resetCards();
+                                          }, 2000);
+                                    }
+                              } 
+                              else {
+                                    resetCards();
+                              }
+                              
+                        }
+                  }
+            });
             
       });
+
 })();
