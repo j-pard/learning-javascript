@@ -12,9 +12,53 @@ body {
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center; }
-  body header h1 {
-    margin: 30px 0; }
+  align-items: center;
+  background-color: black;
+  font-family: 'Uncial Antiqua', cursive; }
+  body header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    body header h1 {
+      margin: 30px 0;
+      color: gold;
+      font-size: 40px; }
+    body header section#subHeader {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      height: 80px;
+      width: 100%; }
+      body header section#subHeader aside {
+        width: 20%;
+        height: 100%;
+        font-family: 'Uncial Antiqua', cursive;
+        color: gold;
+        font-size: 20px; }
+        body header section#subHeader aside button#replayBtn {
+          visibility: hidden;
+          font-family: 'Uncial Antiqua', cursive;
+          color: gold;
+          font-size: 25px;
+          padding: 5px 12px;
+          border: 2px solid gold;
+          border-radius: 10px;
+          background-color: darkred;
+          cursor: pointer;
+          transition: all 0.4s; }
+        body header section#subHeader aside button#replayBtn:hover {
+          transform: scale(1.2); }
+      body header section#subHeader aside#infos {
+        text-align: left;
+        padding-left: 50px; }
+      body header section#subHeader article {
+        width: 60%;
+        height: 100%;
+        color: gold;
+        font-size: 25px;
+        font-style: italic;
+        text-align: center; }
   body main #board {
     display: flex;
     flex-direction: row;
@@ -26,7 +70,7 @@ body {
       cursor: pointer;
       width: 170px;
       height: 250px;
-      border: 2px solid black;
+      border: 2px solid gold;
       border-radius: 10px;
       background-position: center;
       background-size: cover;
@@ -36,7 +80,10 @@ body {
       transition: all 1.5s; }
       body main #board .cards h3 {
         display: none; }
+    body main #board .cards:hover {
+      box-shadow: -5px 5px 5px gold; }
     body main #board .returned {
-      transform: rotateY(0); }
+      transform: rotateY(0);
+      border: 4px solid gold; }
 
 /*# sourceMappingURL=style.css.map */

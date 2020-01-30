@@ -7,10 +7,62 @@ body {
       display: flex;
       flex-direction: column;
       align-items: center;
+      background-color: black;
+      font-family: 'Uncial Antiqua', cursive;
 
       header {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             h1 {
                   margin: 30px 0;
+                  color: gold;
+                  font-size: 40px;
+            }
+
+            section#subHeader {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  height: 80px;
+                  width: 100%;
+                  aside {
+                        width: 20%;
+                        height: 100%;
+                        font-family: 'Uncial Antiqua', cursive;
+                        color: gold;
+                        font-size: 20px;
+
+                        button#replayBtn {
+                              visibility: hidden;
+                              font-family: 'Uncial Antiqua', cursive;
+                              color: gold;
+                              font-size: 25px;
+                              padding: 5px 12px;
+                              border: 2px solid gold;
+                              border-radius: 10px;
+                              background-color: darkred;
+                              cursor: pointer;
+                              transition: all 0.4s;
+                        }
+                        button#replayBtn:hover {
+                              transform: scale(1.2);
+                        }
+                  }
+
+                  aside#infos {
+                        text-align: left;
+                        padding-left: 50px;
+                  }
+                  article {
+                        width: 60%;
+                        height: 100%;
+                        color: gold;
+                        font-size: 25px;
+                        font-style: italic;
+                        text-align: center;
+                  }
             }
       }
 
@@ -33,7 +85,7 @@ body {
                         width: 170px;
                         height: 250px;
       
-                        border: 2px solid black;
+                        border: 2px solid gold;
                         border-radius: 10px;
 
                         background-position: center;
@@ -45,8 +97,13 @@ body {
                         transition: all 1.5s;
                   }
 
+                  .cards:hover {
+                        box-shadow: -5px 5px 5px gold;
+                  }
+
                   .returned {
                         transform: rotateY(0);
+                        border: 4px solid gold;
                   }
             }
       }

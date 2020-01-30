@@ -16,10 +16,17 @@
             CARD14 = document.getElementById("card14")
       ];
 
+      const CHAT = document.getElementById("chat");
+      const REPLAYBTN = document.getElementById("replayBtn");
+      const COUNTCLICK = document.getElementById("countClick");
+      const CHRONO = document.getElementById("chrono");
+
       let usedPositions = [];
       let activeCards = 0;     
       let validation = []; 
       const cardDuration = 220;
+      let validated = [];
+      let countClick = 0;
 
       const MODELS = [
             {
@@ -78,6 +85,7 @@
       };
 
       const genCards = () => {
+            REPLAYBTN.style.visibility = "hidden";
             let j = 0;
             for(let i=0; i<POSITIONS.length; i++) {
                   if (i >= MODELS.length) {
@@ -110,37 +118,85 @@
             setTimeout(() => {
                   card.style.backgroundImage = `url(${card.getAttribute("secondary-background")}`;
             }, cardDuration);
-      }
+      };
+
+      const clickCounter = () => {
+            countClick++;
+            COUNTCLICK.textContent = countClick;
+      };
+
+      // Chrono
+      let chronoID = 0;
+      let chronoStarted = false;
+
+      const chrono = () => {
+            chronoStarted = true;
+            let sec = 0;
+            let min = 0;
+            let hr = 0;
+            chronoID = setInterval(() => {
+                  sec++;
+                  if(sec >= 60) {
+                        sec = 0;
+                        min++;
+                  }
+                  if(min >= 60) {
+                        min = 0;
+                        hr++;
+                  }
+                  if(sec < 10)
+                        sec = "0" + sec;
+                  if(min < 10) 
+                        min = "0" + parseInt(min);
+                  CHRONO.textContent = hr  + ":" + min + ":" + sec;
+            }, 1000);
+      };
+        
+      // RUNNING 
 
       genCards();
-
       POSITIONS.forEach(card => {
             card.addEventListener("click", () => {
+                  if(!chronoStarted) {
+                        chrono();
+                  }
                   if(activeCards >= 2) {
                         resetCards();
                   }
                   else {
+                        clickCounter();
                         activeCards++;
                         returnCard(card);
                         if(!validation.length) {
                               validation.push(card); 
-                              console.log("Was empty and you add : " + validation[0].id);
                         }
                         else if(validation.length > 0) {
-                              console.log("Validation contains : " + validation[0].id + " and you want to add : " + card.id)
                               if (validation[0].id != card.id) {
                                     validation.push(card);
-                                    console.log(card.id + " was added.");
                                     if (validation[0].textContent == validation[1].textContent) {
-                                          console.log("Cards paired, congrats !");
+                                          CHAT.textContent = "Félicitations, vous avez trouvé une paire !";
                                           validation[0].classList.add("validated");
                                           validation[1].classList.add("validated");
+                                          validated.push(validation[0], validation[1]);
                                           setTimeout(() => {
                                                 resetCards();
                                           }, 1000);
+                                          setTimeout(() => {
+                                                CHAT.textContent = "";
+                                          }, 3000);
+
+                                          if(validated.length == POSITIONS.length) {
+                                                REPLAYBTN.style.visibility = "visible";
+                                                clearInterval(chronoID);
+                                                setTimeout(() => { //Timeout is present here to prevent erase him by previous textContent
+                                                      CHAT.textContent = "Vous avez gagné !";
+                                                }, 3000);
+                                                REPLAYBTN.addEventListener("click", () => {
+                                                      window.location.reload();
+                                                })
+                                          }
                                     }
                                     else {
-                                          console.log("Not paired cards");
                                           setTimeout(() => {
                                                 resetCards();
                                           }, 2000);
