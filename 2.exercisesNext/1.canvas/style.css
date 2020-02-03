@@ -8,6 +8,30 @@ header {
       text-align: center;
 }
 
+header section {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+}
+
+header section button {
+      width: max-content;
+      height: max-content;
+      padding: 8px 16px;
+}
+
+header section p {
+      width: 25%;
+}
+
+header section p #timer {
+      text-align: left;
+}
+
+header section p #count {
+      text-align: right;
+}
+
 main {
       width: 100%;
       margin: 100px auto;
