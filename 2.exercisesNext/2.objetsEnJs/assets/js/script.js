@@ -22,6 +22,8 @@
             areIn: false
       };
 
+      let mob = {};
+
       const vendor = {
             name: "George",
             title: "Le Généreux",
@@ -161,7 +163,7 @@
             }
        };
 
-       const mainCharacter = {
+       let mainCharacter = {
             name: "Wood",
             title: "Petit héro fragile",
             level: 1,
@@ -254,7 +256,7 @@
                   p.textContent = str;
             }
             actions.appendChild(p);  
-            //Toujours scroll jusqu'au dernier
+            //Always scroll down
             let allP = document.querySelectorAll("#actions p");
             let lastP = allP[allP.length-1];
             lastP.scrollIntoView();
@@ -274,12 +276,12 @@
        const mobGen = () => {
             let adjust = Math.floor(Math.random() * 3);
             adjust -= 1;
-            let mob = new Mobs(adjust);
-            mob.introduce();
-            return mob;
+            let newMob = new Mobs(adjust);
+            newMob.introduce();
+            return newMob;
        };
 
-       const startFight = () => {  
+       let startFight = () => {  
             if(mainCharacter.hp > 0) {
                   mob = mobGen();
 
@@ -364,10 +366,7 @@
                               adventure.areIn = true;
                               talk("Vous partez à l'aventure !");
                               talk("-");
-                              // COMBATS
                               startFight();
-   
-                              // ---------
                               break;
                   }
 
